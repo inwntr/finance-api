@@ -9,11 +9,20 @@ import expenseRoutes from './routes/expenseRoutes.js'
 import dashboardRoutes from './routes/dashboardRoutes.js'
 import chartRoutes from './routes/chartRoutes.js'
 
+import fs from "fs";
+import path from "path";
+
+const uploadsDir = path.join(process.cwd(), "uploads");
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 dotenv.config()
 
 const app = express()
 
-app.use('/uploads', express.static(path.resolve('uploads')))
+app.use("/uploads", express.static(uploadsDir));
 
 app.use(
   cors({
