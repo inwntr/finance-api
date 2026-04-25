@@ -8,26 +8,14 @@ import incomeRoutes from './routes/incomeRoutes.js'
 import expenseRoutes from './routes/expenseRoutes.js'
 import dashboardRoutes from './routes/dashboardRoutes.js'
 import chartRoutes from './routes/chartRoutes.js'
-import fs from "fs";
-
-const uploadsDir = path.join(process.cwd(), "uploads");
 
 dotenv.config()
 
 const app = express()
 
-app.use("/uploads", express.static(uploadsDir));
+app.use('/uploads', express.static(path.resolve('uploads')))
 
-app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',
-      'https://haonfinance.netlify.app'
-    ],
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  })
-)
+app.use(cors())
 app.use(express.json())
 
 app.use('/auth', authRoutes)
@@ -43,8 +31,6 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000
 
-/*app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
-})*/
-
-export default app;
+})

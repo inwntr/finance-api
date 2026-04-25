@@ -1,5 +1,4 @@
-import multer from 'multer'
-import { randomUUID } from 'crypto'
+import multer from "multer";
 
 export const upload = multer({
   storage: multer.memoryStorage(),
@@ -7,9 +6,3 @@ export const upload = multer({
     fileSize: 5 * 1024 * 1024
   }
 });
-
-  filename: (req, file, cb) => {
-    const uniqueName = `${randomUUID()}-${file.originalname}`
-    cb(null, uniqueName)
-  }
-})
