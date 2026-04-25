@@ -1,9 +1,22 @@
 {
   "version": 2,
-  "rewrites": [
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/index.js"
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://haonfinance.netlify.app"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
     }
   ]
 }
