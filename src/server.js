@@ -8,9 +8,7 @@ import incomeRoutes from './routes/incomeRoutes.js'
 import expenseRoutes from './routes/expenseRoutes.js'
 import dashboardRoutes from './routes/dashboardRoutes.js'
 import chartRoutes from './routes/chartRoutes.js'
-
 import fs from "fs";
-import path from "path";
 
 const uploadsDir = path.join(process.cwd(), "uploads");
 
