@@ -19,27 +19,27 @@ export class UserController {
 
       const data = {};
 
-const normalizedUsername = username
-  ?.trim()
-  .replace(/^@+/, "")
-  .toLowerCase();
+      const normalizedUsername = username
+        ?.trim()
+        .replace(/^@+/, "")
+        .toLowerCase();
 
-if (normalizedUsername && normalizedUsername !== currentUser.username) {
-  const usernameExists = await prisma.user.findFirst({
-    where: {
-      username: normalizedUsername,
-      NOT: {
-        id: req.userId
+      if (normalizedUsername && normalizedUsername !== currentUser.username) {
+        const usernameExists = await prisma.user.findFirst({
+          where: {
+            username: normalizedUsername,
+            NOT: {
+              id: req.userId
+            }
+          }
+        });
+
+        if (usernameExists) {
+          return res.status(409).json({ message: "Username already in use" });
+        }
+
+        data.username = normalizedUsername;
       }
-    }
-  });
-
-  if (usernameExists) {
-    return res.status(409).json({ message: "Username already in use" });
-  }
-
-  data.username = normalizedUsername;
-}
 
       if (req.file) {
         const result = await uploadToCloudinary(req.file.buffer);
@@ -111,6 +111,20 @@ if (normalizedUsername && normalizedUsername !== currentUser.username) {
       return res.status(200).json({ message: "Password updated successfully" });
     } catch (error) {
       return res.status(500).json({ message: error.message });
+    }
+  }
+
+  async deleteAccount(req, res) {
+    try {
+      await prisma.user.delete({
+        where: {
+          id: req.userId
+        }
+      })
+
+      return res.status(200).json({ message: 'Account deleted successfully' })
+    } catch (error) {
+      return res.status(500).json({ message: error.message })
     }
   }
 }
