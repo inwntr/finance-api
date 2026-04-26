@@ -26,4 +26,10 @@ userRoutes.patch(
   userController.updatePassword
 )
 
+userRoutes.delete(
+  '/account',
+  authMiddleware,
+  userController.deleteAccount
+)
+
 export default userRoutes
