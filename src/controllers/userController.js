@@ -17,14 +17,24 @@ export class UserController {
       }
 
       const data = {};
+      const normalizedUsername = username?.trim();
 
-      if (username) {
-        data.username = username;
+      if (normalizedUsername && normalizedUsername !== currentUser.username) {
+        const usernameExists = await prisma.user.findUnique({
+          where: {
+            username: normalizedUsername
+          }
+        });
+
+        if (usernameExists) {
+          return res.status(409).json({ message: "Username already in use" });
+        }
+
+        data.username = normalizedUsername;
       }
 
       if (req.file) {
         const result = await uploadToCloudinary(req.file.buffer);
-
         data.avatarUrl = result.secure_url;
       }
 
