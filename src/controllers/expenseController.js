@@ -58,7 +58,7 @@ export class ExpenseController {
       const updatedExpense = await prisma.expense.update({
         where: { id },
         data: {
-          status: 'PAGO'
+          status: 'PAID'
         }
       })
 
@@ -86,7 +86,7 @@ export class ExpenseController {
       const updatedExpense = await prisma.expense.update({
         where: { id },
         data: {
-          status: 'PENDENTE'
+          status: 'PENDING'
         }
       })
 
