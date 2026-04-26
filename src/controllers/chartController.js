@@ -19,7 +19,7 @@ export class ChartController {
 
       return res.status(200).json([
         { name: 'Entradas', value: totalIncomes },
-        { name: 'Saídas', value: totalExpenses },
+        { name: 'Pendentes', value: totalExpenses },
         { name: 'Pagas', value: totalPaid }
       ])
     } catch (error) {
