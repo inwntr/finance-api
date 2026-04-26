@@ -16,11 +16,11 @@ export class DashboardController {
       const totalExpenses = expenses.reduce((sum, item) => sum + item.value, 0)
 
       const totalPaidExpenses = expenses
-        .filter(item => item.status === 'PAGO')
+        .filter(item => item.status === 'PAID')
         .reduce((sum, item) => sum + item.value, 0)
 
       const totalPendingExpenses = expenses
-        .filter(item => item.status === 'PENDENTE')
+        .filter(item => item.status === 'PENDING')
         .reduce((sum, item) => sum + item.value, 0)
 
       const currentBalance = totalIncomes - totalPaidExpenses
