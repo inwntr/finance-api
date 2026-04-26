@@ -18,21 +18,28 @@ export class UserController {
       }
 
       const data = {};
-      const normalizedUsername = username?.trim();
 
-      if (normalizedUsername && normalizedUsername !== currentUser.username) {
-        const usernameExists = await prisma.user.findUnique({
-          where: {
-            username: normalizedUsername
-          }
-        });
+const normalizedUsername = username
+  ?.trim()
+  .replace(/^@+/, "")
+  .toLowerCase();
 
-        if (usernameExists) {
-          return res.status(409).json({ message: "Username already in use" });
-        }
-
-        data.username = normalizedUsername;
+if (normalizedUsername && normalizedUsername !== currentUser.username) {
+  const usernameExists = await prisma.user.findFirst({
+    where: {
+      username: normalizedUsername,
+      NOT: {
+        id: req.userId
       }
+    }
+  });
+
+  if (usernameExists) {
+    return res.status(409).json({ message: "Username already in use" });
+  }
+
+  data.username = normalizedUsername;
+}
 
       if (req.file) {
         const result = await uploadToCloudinary(req.file.buffer);
