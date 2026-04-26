@@ -68,7 +68,7 @@ export class UserController {
         });
       }
 
-      if (newPassword.length < 8) {
+      if (newPassword.length < 6) {
         return res.status(400).json({
           message: "New password must be at least 8 characters"
         });
