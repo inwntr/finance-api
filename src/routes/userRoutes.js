@@ -20,4 +20,10 @@ userRoutes.patch(
   userController.updateProfile
 )
 
+userRoutes.patch(
+  '/password',
+  authMiddleware,
+  userController.updatePassword
+)
+
 export default userRoutes
