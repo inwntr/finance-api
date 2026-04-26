@@ -12,15 +12,19 @@ export class ChartController {
       })
 
       const totalIncomes = incomes.reduce((sum, item) => sum + item.value, 0)
-      const totalExpenses = expenses.reduce((sum, item) => sum + item.value, 0)
+
       const totalPaid = expenses
         .filter(item => item.status === 'PAID')
+        .reduce((sum, item) => sum + item.value, 0)
+      
+      const totalPending = expenses
+        .filter(item => item.status === 'PENDING')
         .reduce((sum, item) => sum + item.value, 0)
 
       return res.status(200).json([
         { name: 'Entradas', value: totalIncomes },
-        { name: 'Pendentes', value: totalExpenses },
-        { name: 'Pagas', value: totalPaid }
+        { name: 'Pagas', value: totalPaid },
+        { name: 'Pendentes', value: totalPending }
       ])
     } catch (error) {
       return res.status(500).json({ message: error.message })
