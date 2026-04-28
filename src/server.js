@@ -10,6 +10,7 @@ import chartRoutes from "./routes/chartRoutes.js";
 import { reportRoutes } from "./routes/reportRouter.js";
 import budgetRouter from "./routes/budgetRouter.js"
 import insightRoutes from './routes/insightRoutes.js'
+import statusRoutes from './routes/statusRoutes.js'
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use("/api/v1/charts", chartRoutes);
 app.use('/api/v1/reports', reportRoutes)
 app.use('/api/v1/', budgetRouter)
 app.use('/api/v1/insights', insightRoutes)
+app.use('/api/v1/status', statusRoutes)
 
 app.get("/", (req, res) => {
   res.send("API running...");
