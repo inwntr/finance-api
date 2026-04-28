@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { reportController } from '../controllers/ReportController.js'
+import { ReportController } from '../controllers/reportController.js'
 import { authMiddleware } from '../middlewares/authMiddleware.js'
 
 const reportRoutes = Router()
-const reportController = new ReportController()
+const controller = new ReportController()
 
-reportRoutes.get('/monthly', authMiddleware, reportController.monthly)
+reportRoutes.get('/monthly', authMiddleware, controller.monthly)
 
 export { reportRoutes }
