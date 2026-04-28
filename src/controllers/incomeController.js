@@ -1,9 +1,17 @@
 import { prisma } from '../config/prisma.js'
 
+function parseLocalDate(date) {
+  if (!date) return new Date()
+
+  const [year, month, day] = date.split('-').map(Number)
+
+  return new Date(year, month - 1, day, 12, 0, 0)
+}
+
 export class IncomeController {
   async create(req, res) {
     try {
-      const { name, value } = req.body
+      const { name, value, date, category } = req.body
 
       if (!name || !value) {
         return res.status(400).json({ message: 'Name and value are required' })
@@ -13,6 +21,8 @@ export class IncomeController {
         data: {
           name,
           value: Number(value),
+          category,
+          date: date ? parseLocalDate(date) : new Date(),
           userId: req.userId
         }
       })
@@ -25,9 +35,26 @@ export class IncomeController {
 
   async list(req, res) {
     try {
+      const { month, year } = req.query
+
+      let dateFilter = {}
+
+      if (month && year) {
+        const startDate = new Date(Number(year), Number(month) - 1, 1)
+        const endDate = new Date(Number(year), Number(month), 1)
+
+        dateFilter = {
+          date: {
+            gte: startDate,
+            lt: endDate
+          }
+        }
+      }
+
       const incomes = await prisma.income.findMany({
         where: {
-          userId: req.userId
+          userId: req.userId,
+          ...dateFilter
         },
         orderBy: {
           createdAt: 'desc'
@@ -68,7 +95,7 @@ export class IncomeController {
   async update(req, res) {
     try {
       const { id } = req.params
-      const { name, value } = req.body
+      const { name, value, date, category } = req.body
 
       const income = await prisma.income.findFirst({
         where: {
@@ -85,7 +112,9 @@ export class IncomeController {
         where: { id },
         data: {
           name,
-          value: Number(value)
+          value: Number(value),
+          category,
+          date: date ? parseLocalDate(date) : income.date
         }
       })
 

@@ -7,6 +7,9 @@ import incomeRoutes from "./routes/incomeRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import chartRoutes from "./routes/chartRoutes.js";
+import { reportRoutes } from "./routes/reportRouter.js";
+import budgetRouter from "./routes/budgetRouter.js"
+import insightRoutes from './routes/insightRoutes.js'
 
 dotenv.config();
 
@@ -34,17 +37,24 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-app.use("/incomes", incomeRoutes);
-app.use("/expenses", expenseRoutes);
-app.use("/dashboard", dashboardRoutes);
-app.use("/charts", chartRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/incomes", incomeRoutes);
+app.use("/api/v1/expenses", expenseRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
+app.use("/api/v1/charts", chartRoutes);
+app.use('/api/v1/reports', reportRoutes)
+app.use('/api/v1/', budgetRouter)
+app.use('/api/v1/insights', insightRoutes)
 
 app.get("/", (req, res) => {
   res.send("API running...");
 });
 
 const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`)
+})
 
 export default app;
