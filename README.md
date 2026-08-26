@@ -17,7 +17,7 @@ REST API for **Haon Finance**, a personal finance application for managing incom
 
 ## About
 
-Haon Finance API provides authentication and financial management features for the Haon Finance web application.
+My Finance API provides authentication and financial management features for the Haon Finance web application.
 
 Each user's financial data is isolated through authenticated and user-scoped database operations.
 
@@ -177,7 +177,7 @@ Create a `.env` file in the project root:
 
 ```env
 PORT=3000
-DATABASE_URL="postgresql://user:password@localhost:5432/haon_finance"
+DATABASE_URL="postgresql://user:password@localhost:5432/my_finance"
 JWT_SECRET="replace-with-a-secure-random-secret"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
