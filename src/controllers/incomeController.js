@@ -29,7 +29,7 @@ export class IncomeController {
 
       return res.status(201).json(income)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -63,7 +63,7 @@ export class IncomeController {
 
       return res.status(200).json(incomes)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -88,7 +88,7 @@ export class IncomeController {
 
       return res.status(200).json({ message: 'Income removed successfully' })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -120,7 +120,7 @@ export class IncomeController {
 
       return res.status(200).json(updatedIncome)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
