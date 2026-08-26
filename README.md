@@ -232,7 +232,7 @@ Sensitive values must never be committed. Use `.env.example` to document require
 
 The frontend is available at:
 
-- [Haon Finance Frontend](https://github.com/inwntr/finance)
+- [My Finance Frontend](https://github.com/inwntr/finance)
 - [Live Application](https://haonfinance.netlify.app)
 
 ## Author
