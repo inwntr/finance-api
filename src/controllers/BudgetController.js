@@ -30,7 +30,7 @@ export class BudgetController {
 
       return res.json(budget)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -50,7 +50,7 @@ export class BudgetController {
 
       return res.json(budget)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -70,7 +70,7 @@ export class BudgetController {
 
       return res.json({ message: 'Budget deleted successfully' })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
