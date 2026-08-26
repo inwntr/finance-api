@@ -53,7 +53,7 @@ export class AuthController {
       }
     })
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    return res.status(500).json({ "message": "Internal server error" })
   }
 }
 
@@ -104,7 +104,7 @@ export class AuthController {
         }
       })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
