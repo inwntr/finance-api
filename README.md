@@ -1,258 +1,240 @@
-# Finance API 💸
+# Haon Finance API 💸
 
-API REST do **Finance App**, desenvolvida para gerenciar finanças pessoais de forma simples, segura e organizada.
+REST API for **Haon Finance**, a personal finance application for managing income, expenses, budgets, financial goals and monthly insights.
 
-Responsável por autenticação, movimentações financeiras, upload de comprovantes e integração com banco de dados.
+<p>
+  <img src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Express-000000?logo=express&logoColor=white" alt="Express">
+  <img src="https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white" alt="Prisma">
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript">
+</p>
 
----
-
-## ✨ Sobre o projeto
-
-A **Finance API** é o backend do app Finance, responsável por:
-
-- autenticação de usuários
-- gerenciamento de entradas e saídas
-- upload de imagens/comprovantes
-- organização de transações financeiras
-- persistência segura dos dados
-- integração com serviços externos
-
-A API foi construída com foco em performance, escalabilidade e uma estrutura limpa para manutenção.
+- 🌐 [Live application](https://haonfinance.netlify.app)
+- 🖥️ [Frontend source code](https://github.com/inwntr/finance)
 
 ---
 
-## 🚀 Tecnologias utilizadas
+## About
 
-Este projeto foi desenvolvido com as seguintes tecnologias:
+Haon Finance API provides authentication and financial management features for the Haon Finance web application.
 
-- Node.js
-- Express
-- Prisma ORM
-- PostgreSQL
-- Neon
-- JWT
-- Multer
-- Cloudinary
+Each user's financial data is isolated through authenticated and user-scoped database operations.
 
----
+## Features
 
-## 🏗️ Arquitetura
+- User registration and authentication
+- Password hashing with bcrypt
+- JWT-protected routes
+- Profile and avatar management
+- Income and expense tracking
+- Recurring expense management
+- Expense payment status
+- Monthly budgets
+- Financial goals
+- Dashboard summaries
+- Monthly reports
+- Financial charts and insights
+- PostgreSQL persistence with Prisma ORM
+- Cloudinary image storage
+- Health and database status endpoint
 
-A aplicação segue uma arquitetura simples e organizada, separando responsabilidades para facilitar manutenção e escalabilidade.
+## Tech Stack
 
-```bash
-src/
-├── config/         # Configurações gerais
-├── controllers/    # Regras de entrada e resposta
-├── middlewares/    # Autenticação e validações
-├── routes/         # Rotas da aplicação
-├── prisma/         # Prisma client e schema
-├── utils/          # Funções auxiliares
-└── server.js       # Inicialização do servidor
+| Area | Technology |
+|---|---|
+| Runtime | Node.js |
+| Framework | Express |
+| Database | PostgreSQL |
+| ORM | Prisma |
+| Authentication | JSON Web Token |
+| Password hashing | bcrypt |
+| File processing | Multer |
+| Image storage | Cloudinary |
+| Database hosting | Neon |
+| API hosting | Vercel |
+
+## Project Structure
+
+```text
+finance-api/
+├── api/
+│   └── index.js
+├── prisma/
+│   ├── migrations/
+│   └── schema.prisma
+├── src/
+│   ├── config/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── routes/
+│   └── server.js
+├── package.json
+├── prisma.config.ts
+└── vercel.json
 ```
 
----
+## Authentication
 
-## 🔐 Autenticação
-
-A autenticação é feita com **JWT (JSON Web Token)**, garantindo segurança nas rotas privadas.
-
-### Fluxo de autenticação
-
-1. Usuário realiza login
-2. API valida as credenciais
-3. Token JWT é gerado
-4. Cliente envia o token nas rotas protegidas
-5. API valida o token antes de liberar o acesso
-
-### Header esperado
+Protected routes expect a JWT in the `Authorization` header:
 
 ```http
-Authorization: Bearer seu_token_aqui
+Authorization: Bearer <access_token>
 ```
 
----
+The token is created after a successful login and identifies the owner of each financial resource.
 
-## 📦 Funcionalidades
+## API Endpoints
 
-### 👤 Usuário
+Base path:
 
-- Cadastro de usuário
-- Login com autenticação JWT
-- Perfil do usuário
-
-### 💰 Transações
-
-- Criar transações
-- Listar transações
-- Atualizar transações
-- Deletar transações
-- Separação entre entradas e saídas
-
-### 🧾 Uploads
-
-- Upload de imagens/avatar
-- Armazenamento em nuvem com Cloudinary
-- Processamento com Multer
-
----
-
-## ☁️ Upload de arquivos
-
-O upload de arquivos é feito utilizando **Multer**, com envio para a **Cloudinary**.
-
-Fluxo:
-
-1. Usuário envia o arquivo
-2. Multer processa o upload
-3. Arquivo é enviado para a Cloudinary
-4. A URL do arquivo é salva no banco de dados
-5. O arquivo fica disponível para consulta
-
----
-
-## 🗄️ Banco de dados
-
-A aplicação utiliza **PostgreSQL** como banco de dados principal, hospedado na **Neon**.
-
-### Vantagens da stack
-
-- banco relacional robusto
-- ótima performance
-- escalável
-- ideal para dados financeiros
-- integração moderna com Prisma ORM
-
----
-
-## ⚙️ ORM
-
-O projeto utiliza **Prisma ORM** para manipulação do banco de dados.
-
-Benefícios:
-
-- queries mais seguras
-- migrations organizadas
-- produtividade no desenvolvimento
-- melhor manutenção da base de dados
-
----
-
-## 🔥 Como rodar o projeto
-
-### Clone o repositório
-
-```bash
-git clone https://github.com/winterzinha/finance-api.git
+```text
+/api/v1
 ```
 
-### Acesse a pasta
+### Authentication
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/auth/register` | Create an account |
+| `POST` | `/auth/login` | Authenticate a user |
+
+### User
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/user/me` | Validate the current session |
+| `PATCH` | `/user/profile` | Update username or avatar |
+| `PATCH` | `/user/password` | Change password |
+| `DELETE` | `/user/account` | Delete the account |
+
+### Incomes
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/incomes` | Create an income |
+| `GET` | `/incomes` | List incomes |
+| `PATCH` | `/incomes/:id` | Update an income |
+| `DELETE` | `/incomes/:id` | Delete an income |
+
+### Expenses
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/expenses` | Create an expense |
+| `GET` | `/expenses` | List expenses |
+| `PATCH` | `/expenses/:id` | Update an expense |
+| `PATCH` | `/expenses/:id/pay` | Mark an expense as paid |
+| `PATCH` | `/expenses/:id/pending` | Mark an expense as pending |
+| `DELETE` | `/expenses/:id` | Delete an expense |
+
+### Budgets and Goals
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/budgets` | Create or update a monthly budget |
+| `GET` | `/budgets` | Get a monthly budget |
+| `DELETE` | `/budgets` | Delete a monthly budget |
+| `POST` | `/goals` | Create a financial goal |
+| `GET` | `/goals` | List financial goals |
+| `PUT` | `/goals/:id` | Update a financial goal |
+| `DELETE` | `/goals/:id` | Delete a financial goal |
+
+### Analytics
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/dashboard/summary` | Get a financial summary |
+| `GET` | `/charts/financial-overview` | Get chart data |
+| `GET` | `/reports/monthly` | Generate a monthly report |
+| `GET` | `/insights` | Get financial insights |
+| `GET` | `/status` | Check API and database health |
+
+Several listing and analytics endpoints accept `month` and `year` as query parameters:
+
+```http
+GET /api/v1/reports/monthly?month=8&year=2026
+```
+
+## Running Locally
+
+### Requirements
+
+- Node.js
+- npm
+- PostgreSQL database
+- Cloudinary account for avatar uploads
+
+### Installation
 
 ```bash
+git clone https://github.com/inwntr/finance-api.git
 cd finance-api
-```
-
-### Instale as dependências
-
-```bash
 npm install
 ```
 
-### Configure as variáveis de ambiente
-
-Crie um arquivo `.env` na raiz do projeto:
+Create a `.env` file in the project root:
 
 ```env
-DATABASE_URL=
-JWT_SECRET=
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
+PORT=3000
+DATABASE_URL="postgresql://user:password@localhost:5432/haon_finance"
+JWT_SECRET="replace-with-a-secure-random-secret"
+CLOUDINARY_CLOUD_NAME="your-cloud-name"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
 ```
 
-### Rode as migrations
+Apply the database migrations:
 
 ```bash
 npx prisma migrate dev
 ```
 
-### Inicie o servidor
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
----
+The API will be available at:
 
-## 📌 Scripts
-
-```bash
-npm run dev       # ambiente de desenvolvimento
-npm run start     # ambiente de produção
-npx prisma studio # visualizar banco
+```text
+http://localhost:3000
 ```
 
----
+## Security
 
-## 🌐 Endpoints
+The current implementation includes:
 
-Exemplo de rotas da API:
+- Password hashing with bcrypt
+- JWT authentication
+- Authentication middleware for private routes
+- User ownership checks for financial resources
+- Restricted CORS origins
+- Environment-based credentials
+- Upload size limitation
 
-```http
-POST   /users/register
-POST   /users/login
-GET    /users/profile
+Sensitive values must never be committed. Use `.env.example` to document required variables without exposing real credentials.
 
-GET    /transactions
-POST   /transactions
-PUT    /transactions/:id
-DELETE /transactions/:id
+## Roadmap
 
-POST   /upload
-```
+- Request validation with Zod
+- Authentication and upload rate limiting
+- Image MIME-type validation
+- Centralized error handling
+- Automated integration tests
+- OpenAPI/Swagger documentation
+- Docker development environment
+- Pagination for transaction endpoints
+- Refresh-token and session revocation strategy
 
----
+## Related Project
 
-## 🔒 Segurança
+The frontend is available at:
 
-Algumas práticas aplicadas no projeto:
+- [Haon Finance Frontend](https://github.com/inwntr/finance)
+- [Live Application](https://haonfinance.netlify.app)
 
-- autenticação com JWT
-- proteção de rotas privadas
-- hash de senhas
-- validação de dados
-- separação de responsabilidades
-- upload seguro de arquivos
+## Author
 
----
-
-## 📈 Futuras melhorias
-
-A API foi pensada para permitir futuras expansões, como:
-
-- relatórios financeiros
-- filtros por período
-- exportação em PDF
-- dashboard analítico
-- categorização de gastos
-- metas financeiras
-
----
-
-## 👨‍💻 Objetivo
-
-Este projeto foi desenvolvido com foco em estudo, prática e construção de uma aplicação real de finanças, aplicando conceitos modernos de backend e boas práticas de desenvolvimento.
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT.
-
-Sinta-se livre para usar, estudar e modificar.
-
----
-
-## 💚 Autor
-
-Desenvolvido com café, teimosia e vontade de fazer um app bonito funcionar.
+Developed by [Winter](https://github.com/inwntr).
