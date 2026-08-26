@@ -28,7 +28,7 @@ export class GoalController {
 
       return res.status(201).json(goal)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -45,7 +45,7 @@ export class GoalController {
 
       return res.json(goals)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -69,7 +69,7 @@ export class GoalController {
 
       return res.json(goal)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -86,7 +86,7 @@ export class GoalController {
 
       return res.json({ message: 'Goal deleted successfully' })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
