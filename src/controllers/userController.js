@@ -61,7 +61,7 @@ export class UserController {
 
       return res.status(200).json(user);
     } catch (error) {
-      return res.status(500).json({ message: error.message });
+      return res.status(500).json({ "message": "Internal server error" });
     }
   }
 
@@ -110,7 +110,7 @@ export class UserController {
 
       return res.status(200).json({ message: "Password updated successfully" });
     } catch (error) {
-      return res.status(500).json({ message: error.message });
+      return res.status(500).json({ "message": "Internal server error" });
     }
   }
 
@@ -124,7 +124,7 @@ export class UserController {
 
       return res.status(200).json({ message: 'Account deleted successfully' })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
