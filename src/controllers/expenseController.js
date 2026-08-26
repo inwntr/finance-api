@@ -58,7 +58,7 @@ export class ExpenseController {
 
       return res.status(201).json(expense)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -136,7 +136,7 @@ export class ExpenseController {
 
       return res.status(200).json(expenses)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -192,7 +192,7 @@ export class ExpenseController {
 
       return res.status(200).json(updatedExpense)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -217,7 +217,7 @@ export class ExpenseController {
 
       return res.status(200).json({ message: 'Expense removed successfully' })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 
@@ -268,7 +268,7 @@ export class ExpenseController {
 
       return res.status(200).json(updatedExpense)
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
