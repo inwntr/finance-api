@@ -1,4 +1,4 @@
-# Haon Finance API 💸
+# My Finance API 💸
 
 REST API for **Haon Finance**, a personal finance application for managing income, expenses, budgets, financial goals and monthly insights.
 
