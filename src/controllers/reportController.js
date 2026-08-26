@@ -66,7 +66,7 @@ export class ReportController {
         expenses
       })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
