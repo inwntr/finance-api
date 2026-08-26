@@ -58,7 +58,7 @@ export class DashboardController {
         filter: month && year ? { month: Number(month), year: Number(year) } : null
       })
     } catch (error) {
-      return res.status(500).json({ message: error.message })
+      return res.status(500).json({ "message": "Internal server error" })
     }
   }
 }
